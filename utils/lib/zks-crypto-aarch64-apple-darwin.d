@@ -1,0 +1,1 @@
+/Users/runner/work/zksync-crypto-c/zksync-crypto-c/target/aarch64-apple-darwin/release/libzks_crypto.dylib: /Users/runner/work/zksync-crypto-c/zksync-crypto-c/zks-crypto-c/build.rs /Users/runner/work/zksync-crypto-c/zksync-crypto-c/zks-crypto-c/src/lib.rs /Users/runner/work/zksync-crypto-c/zksync-crypto-c/zks-crypto-c/src/utils.rs

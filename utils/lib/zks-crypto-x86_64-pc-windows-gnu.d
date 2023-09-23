@@ -1,0 +1,1 @@
+D:\a\zksync-crypto-c\zksync-crypto-c\target\x86_64-pc-windows-gnu\release\zks_crypto.dll: D:\a\zksync-crypto-c\zksync-crypto-c\zks-crypto-c\build.rs D:\a\zksync-crypto-c\zksync-crypto-c\zks-crypto-c\src\lib.rs D:\a\zksync-crypto-c\zksync-crypto-c\zks-crypto-c\src\utils.rs

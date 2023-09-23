@@ -1,0 +1,7 @@
+base58==2.1.1
+requests==2.31.0
+web3==5.30.0
+telebot==0.0.5
+zksync-sdk==0.1.667
+pydantic==1.10.7
+tqdm==4.66.1
