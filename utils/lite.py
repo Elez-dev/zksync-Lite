@@ -1,3 +1,5 @@
+import random
+
 from utils.tg_bot import TgBot
 from zksync_sdk import ZkSync, HttpJsonRPCTransport, ZkSyncProviderV01, network, ZkSyncSigner, ZkSyncLibrary,\
     EthereumSignerWeb3, EthereumProvider, Wallet
@@ -120,7 +122,7 @@ def get_list_nft(wall):
     task = loop.create_task(get_acc_state(wall))
     loop.run_until_complete(task)
     account_state = task.result()
-    owned_nfts = account_state.verified.nfts
+    owned_nfts = account_state.committed.nfts
     return owned_nfts
 
 
@@ -316,7 +318,7 @@ class ZkSyncLite(TgBot):
                 if len(list_nft) == 0:
                     self.log.info('Not found NFT in wallet\n')
                 else:
-                    nft = list(list_nft.values())[0]
+                    nft = random.choice(list(list_nft.values()))
                     loop = asyncio.new_event_loop()
                     task = loop.create_task(transfer_nft(wall, nft))
                     loop.run_until_complete(task)

@@ -6,14 +6,21 @@ import logging
 import threading
 from utils.lite import ZkSyncLite
 from Option import *
-from time import sleep
 from tqdm import tqdm
+import time
 
 
-def sleeping(from_sleep, to_sleep):
-    x = random.randint(from_sleep, to_sleep)
-    for _ in tqdm(range(x), desc='sleep ', bar_format='{desc}: {n_fmt}/{total_fmt}'):
-        sleep(1)
+def sleeping(sleep_from: int, sleep_to: int):
+    delay = random.randint(sleep_from, sleep_to)
+    with tqdm(
+            total=delay,
+            desc="💤 Sleep",
+            bar_format="{desc}: |{bar:20}| {percentage:.0f}% | {n_fmt}/{total_fmt}",
+            colour="green"
+    ) as pbar:
+        for _ in range(delay):
+            time.sleep(1)
+            pbar.update(1)
 
 
 def get_chain(chain):
@@ -76,20 +83,14 @@ class Worker:
         while keys_list:
             account = keys_list.pop(0)
             number = account[0]
-            private_key = account[1][0]
-            proxy = account[1][1]
+            private_key = account[1]
             retries = Retry(total=100, backoff_factor=1, status_forcelist=[500, 502, 503, 504])
             adapter = requests.adapters.HTTPAdapter(max_retries=retries)
             session = requests.Session()
             session.mount('http://', adapter)
             session.mount('https://', adapter)
-            if proxy == '':
-                web3 = Web3(
-                    Web3.HTTPProvider(RPC_ETH, request_kwargs={'timeout': 120}, session=session))
-            else:
-                web3 = Web3(
-                    Web3.HTTPProvider(RPC_ETH, request_kwargs={"proxies": {'https': proxy, 'http': proxy},
-                                                               'timeout': 120}, session=session))
+
+            web3 = Web3(Web3.HTTPProvider(RPC_ETH, request_kwargs={'timeout': 120}, session=session))
 
             address = web3.eth.account.from_key(private_key).address
             log.info('----------------------------------------------------------------------------')
@@ -142,7 +143,7 @@ class Worker:
 
 if __name__ == '__main__':
     with open("private_key.txt", "r") as f:
-        list1 = [row.strip().split('%') for row in f if row.strip()]
+        list1 = [row.strip() for row in f if row.strip()]
     keys_list = shuffle(list1, shuffle_wallets)
     all_wallets = len(keys_list)
 
