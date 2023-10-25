@@ -139,6 +139,8 @@ class Worker:
                 sleeping(time_delay_min, time_delay_max)
 
             session.close()
+            log.info(f'Аккаунт завершен, сплю перехожу к следующему')
+            sleeping(TIME_DELAY_ACC_MIN, TIME_DELAY_ACC_MAX)
 
 
 if __name__ == '__main__':
