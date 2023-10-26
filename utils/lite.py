@@ -122,7 +122,7 @@ def get_list_nft(wall):
     task = loop.create_task(get_acc_state(wall))
     loop.run_until_complete(task)
     account_state = task.result()
-    owned_nfts = account_state.committed.nfts
+    owned_nfts = account_state.verified.minted_nfts
     return owned_nfts
 
 
