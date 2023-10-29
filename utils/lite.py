@@ -240,7 +240,7 @@ class ZkSyncLite(TgBot):
                 task = loop.create_task(tx_send_async(wall, to_address, amount))
                 loop.run_until_complete(task)
                 tx_status = task.result()
-                self.log.info(f'Successfully send {amount} ETH || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
+                self.log.info(f'[{self.number}] Successfully send {amount} ETH || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
                 if TgBot.TG_BOT_SEND is True:
                     TgBot.send_message_success(self, self.number, f'Successfully send {amount} ETH', self.account.address,
                                                f'https://zkscan.io/explorer/transactions/0x{tx_status}')
@@ -268,15 +268,15 @@ class ZkSyncLite(TgBot):
                 task = loop.create_task(send_nft_tx(wall, self.account, random_image))
                 loop.run_until_complete(task)
                 tx_status = task.result()
-                self.log.info(f'Successfully claim NFT || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
+                self.log.info(f'[{self.number}] Successfully claim NFT || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
                 if TgBot.TG_BOT_SEND is True:
                     TgBot.send_message_success(self, self.number, 'Successfully claim NFT', self.account.address,
                                                f'https://zkscan.io/explorer/transactions/0x{tx_status}')
             else:
-                self.log.info(f'Insufficient funds\n')
+                self.log.info(f'[{self.number}] Insufficient funds\n')
                 return 'balance'
         except Exception as error:
-            self.log.info(f'Unsuccessfully claim NFT')
+            self.log.info(f'[{self.number}] Unsuccessfully claim NFT')
             self.log.info(error)
             retry += 1
             if retry > 5:
@@ -293,7 +293,7 @@ class ZkSyncLite(TgBot):
             if tx_status is None:
                 return
             else:
-                self.log.info(f'Your account has not been activated. Activation was successful. || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
+                self.log.info(f'[{self.number}] Your account has not been activated. Activation was successful. || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
                 if TgBot.TG_BOT_SEND is True:
                     TgBot.send_message_success(self, self.number, 'Your account has not been activated.\nActivation was successful', self.account.address,
                                                f'https://zkscan.io/explorer/transactions/0x{tx_status}')
@@ -323,12 +323,12 @@ class ZkSyncLite(TgBot):
                     task = loop.create_task(transfer_nft(wall, nft))
                     loop.run_until_complete(task)
                     tx_status = task.result()
-                    self.log.info(f'Successfully transfer NFT || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
+                    self.log.info(f'[{self.number}] Successfully transfer NFT || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
                     if TgBot.TG_BOT_SEND is True:
                         TgBot.send_message_success(self, self.number, 'Successfully transfer NFT', self.account.address,
                                                    f'https://zkscan.io/explorer/transactions/0x{tx_status}')
             else:
-                self.log.info(f'Insufficient funds\n')
+                self.log.info(f'[{self.number}] Insufficient funds\n')
                 return 'balance'
         except Exception as error:
             self.log.info(error)
@@ -354,13 +354,13 @@ class ZkSyncLite(TgBot):
                 value_bridge = max_value_bridge
             amount = round(Web3.fromWei(value_bridge, 'ether'), 6)
             value_bridge = get_orbiter_value(value_bridge, chain_to)
-            self.log.info(f"I gonna send {amount} ETH")
+            self.log.info(f"[{self.number}] I gonna send {amount} ETH")
             address = Web3.toChecksumAddress('0x80C67432656d59144cEFf962E8fAF8926599bCF8')
             loop = asyncio.new_event_loop()
             task = loop.create_task(tx_send_async(wall, address, value_bridge))
             loop.run_until_complete(task)
             tx_status = task.result()
-            self.log.info(f'Successfully withdrawl {amount} ETH to {chain_to} || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
+            self.log.info(f'[{self.number}] Successfully withdrawl {amount} ETH to {chain_to} || https://zkscan.io/explorer/transactions/0x{tx_status}\n')
             if TgBot.TG_BOT_SEND is True:
                 TgBot.send_message_success(self, self.number, f'Successfully withdrawl {amount} ETH to {chain_to}',
                                            self.account.address, f'https://zkscan.io/explorer/transactions/0x{tx_status}')
