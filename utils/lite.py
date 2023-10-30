@@ -250,7 +250,7 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.send_eth(wall, to_address, value, retry)
+            return self.send_eth(wall, to_address, value, retry)
 
     def claim_nft(self, wall, cid, retry=0):
         try:
@@ -279,7 +279,7 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.claim_nft(wall, cid, retry)
+            return self.claim_nft(wall, cid, retry)
 
     def check_create_acc(self, wall, retry=0):
         try:
@@ -301,7 +301,7 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.check_create_acc(wall, retry)
+            return self.check_create_acc(wall, retry)
 
     def bridge_nft(self, wall, retry=0):
         try:
@@ -333,7 +333,7 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.bridge_nft(wall, retry)
+            return self.bridge_nft(wall, retry)
 
     def withdrawl_eth(self, wall, chain_to, value_eth, retry=0):
         try:
@@ -367,4 +367,4 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.send_eth(wall, chain_to, value_eth, retry)
+            return self.send_eth(wall, chain_to, value_eth, retry)
