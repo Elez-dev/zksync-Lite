@@ -217,7 +217,7 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.connect_wallet(path, retry)
+            return self.connect_wallet(path, retry)
 
     def send_eth(self, wall, to_address, value, retry=0):
         try:
