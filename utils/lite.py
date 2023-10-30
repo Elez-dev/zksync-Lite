@@ -1,10 +1,7 @@
 import random
-
 from utils.tg_bot import TgBot
 from zksync_sdk import ZkSync, HttpJsonRPCTransport, ZkSyncProviderV01, network, ZkSyncSigner, ZkSyncLibrary,\
     EthereumSignerWeb3, EthereumProvider, Wallet
-from fractions import Fraction
-from zksync_sdk.types import RatioType
 from zksync_sdk.types import ChangePubKeyEcdsa
 from decimal import Decimal
 from time import sleep
@@ -220,7 +217,7 @@ class ZkSyncLite(TgBot):
             if retry > 5:
                 return 0
             sleep(30)
-            self.connect_wallet(retry)
+            self.connect_wallet(path, retry)
 
     def send_eth(self, wall, to_address, value, retry=0):
         try:
